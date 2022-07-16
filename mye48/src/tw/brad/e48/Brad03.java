@@ -6,6 +6,7 @@ public class Brad03 {
 		byte v1 = 10;
 		short v2 = 3;
 		int v3 = v1 + v2; 
+		System.out.println(v3);
 	}
 
 }
