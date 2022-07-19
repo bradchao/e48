@@ -4,6 +4,7 @@ public class PokerV1 {
 
 	public static void main(String[] args) {
 		int[] poker = new int[52];
+		long start = System.currentTimeMillis();
 		
 		for (int i=0; i<poker.length; i++) {
 			int temp = (int)(Math.random()*52);
@@ -26,6 +27,8 @@ public class PokerV1 {
 			}
 			
 		}
+		System.out.println("---");
+		System.out.println(System.currentTimeMillis() - start);
 	}
 
 }
