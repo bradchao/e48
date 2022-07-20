@@ -28,6 +28,14 @@ public class TWId {
 		
 	}
 	
+	public static TWId createTWId(String id) {
+		TWId twId = null;
+		if (isRightId(id)) {
+			twId = new TWId(id);
+		}
+		return twId;
+	}
+	
 	private TWId(String id) {
 		this.id = id;
 	}
