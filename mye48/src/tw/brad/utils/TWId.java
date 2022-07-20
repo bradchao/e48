@@ -18,6 +18,13 @@ public class TWId {
 		temp.append(isMale?"1":"2");
 		for (int i=0; i<7; i++) temp.append((int)(Math.random()*10));
 		
+		String id0 = temp.toString();
+		for (int i=0; i<10; i++) {
+			if (isRightId(id0 + i)) {
+				id = id0 + i;
+				break;
+			}
+		}
 		
 	}
 	
