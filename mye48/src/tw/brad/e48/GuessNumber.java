@@ -37,15 +37,22 @@ public class GuessNumber extends JFrame implements ActionListener {
 		setSize(640, 480);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		newGame();
 	}
 	public static void main(String[] args) {
 		new GuessNumber();
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		//System.out.println("OK");
-		createAnswer(4);
-		System.out.println(answer);
+		String gus = input.getText();
+		String result = checkAB(gus);
+		log.append(gus + " => " + result + "\n");
+	}
+	
+	private String checkAB(String g) {
+		
+		return "1A2B";
 	}
 	
 	private void createAnswer(int dig) {
@@ -60,9 +67,18 @@ public class GuessNumber extends JFrame implements ActionListener {
 			poker[rand] = poker[i];
 			poker[i] = temp;
 		}
-		
-		answer = "" + poker[0] + poker[1] + poker[2];
+		StringBuffer sb = new StringBuffer();
+		for (int i=0; i<dig; i++) {
+			sb.append(poker[i]);
+		}
+		answer = sb.toString();
 		
 	}
+
+	
+	private void newGame() {
+		createAnswer(3);
+	}
+
 
 }
