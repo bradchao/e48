@@ -16,6 +16,7 @@ class Brad252 extends Brad251 {
 		System.out.println("Brad252()");
 	}
 	Brad252(int a){
+		this();
 		System.out.println("Brad252(int)");
 	}
 }
