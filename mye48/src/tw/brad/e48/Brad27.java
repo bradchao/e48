@@ -9,16 +9,14 @@ public class Brad27 {
 		System.out.println(isRight);
 		System.out.println(Math.PI);
 		
-		StringBuffer sb = new StringBuffer();
-		sb.append("A");
-		System.out.println(sb);
-		sb.append("B");
-		System.out.println(sb);
-		sb.append("Brad")
-			.append("Chao")
-			.append("Hello");
-		System.out.println(sb);
-		
+		TWId id1 = new TWId();
+		TWId id2 = new TWId(true);
+		TWId id3 = new TWId(1);
+		TWId id4 = new TWId(false, 5);
+		System.out.println(id1.getId());
+		System.out.println(id2.getId());
+		System.out.println(id3.getId());
+		System.out.println(id4.getId());
 		
 	}
 
