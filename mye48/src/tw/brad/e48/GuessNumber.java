@@ -51,8 +51,15 @@ public class GuessNumber extends JFrame implements ActionListener {
 	}
 	
 	private String checkAB(String g) {
-		
-		return "1A2B";
+		int a, b; a = b = 0;
+		for (int i=0; i<answer.length(); i++) {
+			if (answer.charAt(i) == g.charAt(i)) {
+				a++;
+			}else if (answer.indexOf(g.charAt(i))>=0) {
+				b++;
+			}
+		}
+		return String.format("%dA%dB",a,b);
 	}
 	
 	private void createAnswer(int dig) {
@@ -78,6 +85,7 @@ public class GuessNumber extends JFrame implements ActionListener {
 	
 	private void newGame() {
 		createAnswer(3);
+		System.out.println(answer);
 	}
 
 
