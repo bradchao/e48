@@ -7,8 +7,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import tw.brad.utils.MyDrawer;
+
 public class SignApp extends JFrame{
 	private JButton clear, undo, redo;
+	private MyDrawer myDrawer;
 	
 	public SignApp() {
 		super("SignApp");
@@ -22,6 +25,9 @@ public class SignApp extends JFrame{
 		top.add(clear); top.add(undo); top.add(redo);
 		
 		add(top, BorderLayout.NORTH);
+		
+		myDrawer = new MyDrawer();
+		add(myDrawer, BorderLayout.CENTER);
 		
 		setSize(800, 480);
 		setVisible(true);
