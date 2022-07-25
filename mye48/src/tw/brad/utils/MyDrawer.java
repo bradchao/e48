@@ -7,11 +7,14 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.HashMap;
+import java.util.LinkedList;
 
 import javax.swing.DebugGraphics;
 import javax.swing.JPanel;
 
 public class MyDrawer extends JPanel {
+	private LinkedList<HashMap<String, Integer>> line;
 	
 	public MyDrawer() {
 		setBackground(Color.yellow);
@@ -19,6 +22,8 @@ public class MyDrawer extends JPanel {
 		MyMouseListener listener = new MyMouseListener();
 		addMouseListener(listener);
 		addMouseMotionListener(listener);
+		
+		line = new LinkedList<>();
 
 	}
 
