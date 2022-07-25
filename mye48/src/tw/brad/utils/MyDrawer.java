@@ -14,7 +14,7 @@ import javax.swing.DebugGraphics;
 import javax.swing.JPanel;
 
 public class MyDrawer extends JPanel {
-	private LinkedList<LinkedList<HashMap<String, Integer>>> lines;
+	private LinkedList<LinkedList<HashMap<String, Integer>>> lines, recycler;
 	
 	public MyDrawer() {
 		setBackground(Color.yellow);
@@ -24,7 +24,7 @@ public class MyDrawer extends JPanel {
 		addMouseMotionListener(listener);
 		
 		lines = new LinkedList<>();
-
+		recycler = new LinkedList<>();
 	}
 
 	@Override
@@ -55,6 +55,8 @@ public class MyDrawer extends JPanel {
 			line.add(point);
 			
 			lines.add(line);
+			
+			recycler.clear();
 		}
 		@Override
 		public void mouseDragged(MouseEvent e) {
@@ -73,9 +75,18 @@ public class MyDrawer extends JPanel {
 	
 	public void undo() {
 		if (lines.size() > 0) {
-			lines.removeLast();
+			recycler.add(lines.removeLast());
 			repaint();
 		}
 	}
+	
+	public void redo() {
+		if (recycler.size() > 0) {
+			lines.add(recycler.removeLast());
+			repaint();
+		}
+	}
+	
+	
 }
 

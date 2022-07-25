@@ -53,7 +53,7 @@ public class SignApp extends JFrame {
 		redo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				myDrawer.redo();
 			}
 		});
 	}
