@@ -34,17 +34,28 @@ public class MyDrawer extends JPanel {
 		Graphics2D g2d = (Graphics2D)g;
 		g2d.setStroke(new BasicStroke(4));
 		g2d.setColor(Color.BLUE);
-		g2d.drawLine(0, 0, 400, 200);
+		
+		for (int i=1; i<line.size(); i++) {
+			HashMap<String, Integer> p0 = line.get(i-1);
+			HashMap<String, Integer> p1 = line.get(i);
+			g2d.drawLine(p0.get("x"), p0.get("y"), 
+					p1.get("x"), p1.get("y"));
+		}
 	}
 	
 	private class MyMouseListener extends MouseAdapter {
 		@Override
 		public void mousePressed(MouseEvent e) {
-			System.out.println("Press:" + e.getX() + "," + e.getY());
+			HashMap<String, Integer> point = new HashMap<>();
+			point.put("x", e.getX()); point.put("y", e.getY());
+			line.add(point);
 		}
 		@Override
 		public void mouseDragged(MouseEvent e) {
-			System.out.println("Drag:" + e.getX() + "," + e.getY());
+			HashMap<String, Integer> point = new HashMap<>();
+			point.put("x", e.getX()); point.put("y", e.getY());
+			line.add(point);
+			repaint();
 		}
 	}
 
