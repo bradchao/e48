@@ -66,6 +66,16 @@ public class MyDrawer extends JPanel {
 		}
 	}
 
+	public void clear() {
+		lines.clear();
+		repaint();
+	}
 	
+	public void undo() {
+		if (lines.size() > 0) {
+			lines.removeLast();
+			repaint();
+		}
+	}
 }
 

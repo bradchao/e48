@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 import tw.brad.utils.MyDrawer;
 
-public class SignApp extends JFrame implements ActionListener{
+public class SignApp extends JFrame {
 	private JButton clear, undo, redo;
 	private MyDrawer myDrawer;
 	
@@ -38,20 +38,24 @@ public class SignApp extends JFrame implements ActionListener{
 		addEventListener();
 	}
 	
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == clear) {
-			System.out.println("Clear");
-		}else if (e.getSource() == undo) {
-			System.out.println("undo");
-		}else if (e.getSource() == redo) {
-			System.out.println("redo");
-		}
-	}
-	
 	private void addEventListener() {
-		clear.addActionListener(this);
-		undo.addActionListener(this);
-		redo.addActionListener(this);
+		clear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				myDrawer.clear();
+			}
+		});
+		undo.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				myDrawer.undo();
+			}
+		});
+		redo.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 	}
 
 	public static void main(String[] args) {
