@@ -2,8 +2,12 @@ package tw.brad.e48;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -31,8 +35,27 @@ public class MyEditor extends JFrame {
 		setSize(640, 480);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		processEvent();
+	}
+	
+	private void processEvent() {
+		open.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				openFile();
+			}
+		});
 	}
 
+	private void openFile() {
+		JFileChooser jfc = new JFileChooser();
+		if (jfc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+			File file = jfc.getSelectedFile();
+			System.out.println(file.getAbsolutePath());
+		}
+	}
+	
 	public static void main(String[] args) {
 		new MyEditor();
 	}
