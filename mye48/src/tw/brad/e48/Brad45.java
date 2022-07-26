@@ -10,12 +10,10 @@ public class Brad45 {
 		try {
 			FileInputStream fin = 
 					new FileInputStream("dir1/file2.txt");
-			int d = fin.read();
-			System.out.println((char)d);
-			d = fin.read();
-			System.out.println((char)d);
-			d = fin.read();
-			System.out.println((char)d);
+			int data;
+			while ( (data = fin.read()) != -1) {
+				System.out.print((char)data);
+			}
 			
 			fin.close();
 			System.out.println("OK");
