@@ -1,6 +1,8 @@
 package tw.brad.utils;
 
-public class Bike {
+import java.io.Serializable;
+
+public class Bike implements Serializable{
 	protected double speed;
 	private int color;
 	

@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import tw.brad.utils.MyDrawer;
 
 public class SignApp extends JFrame {
-	private JButton clear, undo, redo, save;
+	private JButton clear, undo, redo, save, saveObj, loadObj;
 	private MyDrawer myDrawer;
 	
 	public SignApp() {
@@ -23,9 +23,12 @@ public class SignApp extends JFrame {
 		undo = new JButton("Undo");
 		redo = new JButton("Redo");
 		save = new JButton("Save");
+		saveObj = new JButton("Save Lines");
+		loadObj = new JButton("Load Lines");
 		
 		JPanel top = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		top.add(clear); top.add(undo); top.add(redo); top.add(save);
+		top.add(saveObj); top.add(loadObj);
 		
 		add(top, BorderLayout.NORTH);
 		
@@ -62,6 +65,18 @@ public class SignApp extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				myDrawer.saveJPEG();
+			}
+		});
+		saveObj.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				myDrawer.saveLines();
+			}
+		});
+		loadObj.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				myDrawer.loadLines();
 			}
 		});
 	}
