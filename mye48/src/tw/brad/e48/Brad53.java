@@ -17,16 +17,16 @@ public class Brad53 {
 		s1.getBike().upSpeed();
 		System.out.println(s1.getBike().getSpeed());
 		
-//		try(FileOutputStream fout = new FileOutputStream("dir1/score1.brad");
-//			ObjectOutputStream oout = new ObjectOutputStream(fout)
-//				) {
-//			oout.writeObject(s1);
-//			oout.flush();
-//			System.out.println("OK");
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		try(FileOutputStream fout = new FileOutputStream("dir1/score1.brad");
+			ObjectOutputStream oout = new ObjectOutputStream(fout)
+				) {
+			oout.writeObject(s1);
+			oout.flush();
+			System.out.println("OK");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 	}

@@ -12,7 +12,8 @@ public class Brad54 {
 			Object obj = oin.readObject();
 			Student s1 = (Student)obj;
 			System.out.println(s1.getName() + ":" + s1.sum() + ":" +s1.avg());
-	
+			System.out.println(s1.getBike().getSpeed());
+
 		}catch(Exception e) {
 			System.out.println(e.toString());
 		}
