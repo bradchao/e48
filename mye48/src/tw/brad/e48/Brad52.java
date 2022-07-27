@@ -11,7 +11,8 @@ public class Brad52 {
 			BufferedReader br = new BufferedReader(reader);
 			String line;
 			while ( (line = br.readLine()) != null) {
-				System.out.println(line);
+				String[] row = line.split(",");
+				System.out.println(row[1] + ":" + row[7]);
 			}
 			reader.close();
 		}catch(Exception e) {
