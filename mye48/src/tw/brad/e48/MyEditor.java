@@ -15,6 +15,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 public class MyEditor extends JFrame {
@@ -35,8 +36,10 @@ public class MyEditor extends JFrame {
 		JPanel top = new JPanel(new FlowLayout());
 		top.add(open); top.add(save);top.add(saveas);
 		
+		JScrollPane jsp = new JScrollPane(editor);
+		
 		add(top, BorderLayout.NORTH);
-		add(editor, BorderLayout.CENTER);
+		add(jsp, BorderLayout.CENTER);
 		
 		setSize(640, 480);
 		setVisible(true);
@@ -70,6 +73,7 @@ public class MyEditor extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					saveAsFile();
+					JOptionPane.showMessageDialog(null, "Save OK");
 				} catch (Exception e1) {
 					System.out.println(e1.toString());
 				}
@@ -116,6 +120,7 @@ public class MyEditor extends JFrame {
 			writer.write(editor.getText());
 			writer.flush();
 			writer.close();
+			openFile = saveAsFile;
 		}
 	}
 	
