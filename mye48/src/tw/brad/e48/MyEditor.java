@@ -63,6 +63,18 @@ public class MyEditor extends JFrame {
 				}
 			}
 		});
+		
+		saveas.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					saveAsFile();
+				} catch (Exception e1) {
+					System.out.println(e1.toString());
+				}
+			}
+		});
 	}
 
 	private void openFile() {
@@ -95,6 +107,20 @@ public class MyEditor extends JFrame {
 			writer.close();
 		}
 	}
+	
+	private void saveAsFile() throws Exception {
+		JFileChooser jfc = new JFileChooser();
+		if (jfc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+			File saveAsFile = jfc.getSelectedFile();
+			FileWriter writer = new FileWriter(saveAsFile);
+			writer.write(editor.getText());
+			writer.flush();
+			writer.close();
+		}
+	}
+	
+	
+	
 	
 	public static void main(String[] args) {
 		new MyEditor();
