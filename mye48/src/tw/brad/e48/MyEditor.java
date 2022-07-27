@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileReader;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -15,6 +16,7 @@ import javax.swing.JTextArea;
 public class MyEditor extends JFrame {
 	private JButton open, save, saveas;
 	private JTextArea editor;
+	private File openFile = null;
 	
 	public MyEditor() {
 		super("文字編輯器");
@@ -51,9 +53,19 @@ public class MyEditor extends JFrame {
 	private void openFile() {
 		JFileChooser jfc = new JFileChooser();
 		if (jfc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-			File file = jfc.getSelectedFile();
-			System.out.println(file.getAbsolutePath());
+			openFile = jfc.getSelectedFile();
+			readFile();
 		}
+	}
+	
+	private void readFile() throws Exception {
+		FileReader reader = new FileReader(openFile);
+		long size = openFile.length();
+		char[] buf = new char[(int)size];
+		reader.read(buf);
+		reader.close();
+		
+		editor.setText(new String(buf));
 	}
 	
 	public static void main(String[] args) {
