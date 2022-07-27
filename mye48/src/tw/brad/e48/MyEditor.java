@@ -5,11 +5,15 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
@@ -48,13 +52,28 @@ public class MyEditor extends JFrame {
 				openFile();
 			}
 		});
+		save.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					saveFile();
+					JOptionPane.showMessageDialog(null, "Save OK");
+				} catch (Exception e1) {
+					System.out.println(e1.toString());
+				}
+			}
+		});
 	}
 
 	private void openFile() {
 		JFileChooser jfc = new JFileChooser();
 		if (jfc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
 			openFile = jfc.getSelectedFile();
-			readFile();
+			try {
+				readFile();
+			} catch (Exception e) {
+				System.out.println(e.toString());
+			}
 		}
 	}
 	
@@ -66,6 +85,15 @@ public class MyEditor extends JFrame {
 		reader.close();
 		
 		editor.setText(new String(buf));
+	}
+	
+	private void saveFile() throws FileNotFoundException, IOException {
+		if (openFile != null) {
+			FileWriter writer = new FileWriter(openFile);
+			writer.write(editor.getText());
+			writer.flush();
+			writer.close();
+		}
 	}
 	
 	public static void main(String[] args) {
