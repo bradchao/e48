@@ -12,6 +12,7 @@ public class Racing extends JFrame {
 	private JButton go;
 	private JLabel[] lanes = new JLabel[8];
 	private Car[] cars = new Car[8];
+	private int rank;
 	
 	public Racing() {
 		super("Racing Game");
@@ -37,6 +38,11 @@ public class Racing extends JFrame {
 	}
 	
 	private void go() {
+		go.setEnabled(false);
+		rank = 0;
+		for (int i=0; i<lanes.length; i++) {
+			lanes[i].setText((i+1) + ".");
+		}
 		for (int i=0; i<cars.length; i++) {
 			cars[i] = new Car(i);
 		}
@@ -54,7 +60,16 @@ public class Racing extends JFrame {
 		@Override
 		public void run() {
 			for (int i=0; i<100; i++) {
-				lanes[lane].setText(lanes[lane].getText() +  ">");
+				if (i == 99) {
+					lanes[lane].setText(lanes[lane].getText() +  ">" + ++rank);
+				}else {
+					lanes[lane].setText(lanes[lane].getText() +  ">");
+				}
+				if (rank == 8) go.setEnabled(true);
+				try {
+					Thread.sleep(10 + (int)(Math.random()*100));
+				} catch (InterruptedException e) {
+				}
 			}
 		}
 	}
