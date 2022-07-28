@@ -1,6 +1,8 @@
 package tw.brad.e48;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -9,6 +11,7 @@ import javax.swing.JLabel;
 public class Racing extends JFrame {
 	private JButton go;
 	private JLabel[] lanes = new JLabel[8];
+	private Car[] cars = new Car[8];
 	
 	public Racing() {
 		super("Racing Game");
@@ -24,6 +27,23 @@ public class Racing extends JFrame {
 		setSize(1024, 480);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		go.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				go();
+			}
+		});
+	}
+	
+	private void go() {
+		for (int i=0; i<cars.length; i++) {
+			cars[i] = new Car(i);
+		}
+		
+		for (int i=0; i<cars.length; i++) {
+			cars[i].start();
+		}
 	}
 	
 	private class Car extends Thread {
