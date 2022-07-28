@@ -9,8 +9,8 @@ public class Brad57 {
 		Timer timer = new Timer();
 		MyTask m1 = new MyTask();
 		StopTask s1 = new StopTask(timer);
-		timer.schedule(m1, 3*1000);
-		timer.schedule(s1, 5*1000);
+		timer.schedule(m1, 0, 1*1000);
+		timer.schedule(s1, 10*1000);
 		System.out.println("Brad");
 	}
 	
