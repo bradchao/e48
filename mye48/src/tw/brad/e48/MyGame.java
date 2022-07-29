@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Timer;
@@ -43,7 +45,18 @@ public class MyGame extends JFrame {
 
 			}catch(Exception e){}
 			
+			addMouseListener(new MouseAdapter() {
+				@Override
+				public void mousePressed(MouseEvent e) {
+					createNewBall(e.getX(), e.getY());
+				}
+			});
+			
 			timer.schedule(new RefreshTask(), 100, 16);	// FPS
+		}
+		
+		private void createNewBall(int x, int y) {
+			
 		}
 		
 		private void init() {
