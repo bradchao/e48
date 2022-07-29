@@ -79,10 +79,30 @@ public class MyGame extends JFrame {
 }
 
 class Ball extends TimerTask {
+	private int x, y, dx, dy;
+	private int w, h;
+	private int img;	// 1: ball1; 2: ball2
+	private JPanel view;
+	
+	Ball(int x, int y, int w, int h, JPanel view){
+		this.x = x; this.y = y; this.w = w; this.h = h;
+		this.img = (int)(Math.random()*2)+1;
+		dx = (int)(Math.random()*9)-4;
+		dy = (int)(Math.random()*9)-4;
+		this.view = view;
+	}
 	
 	@Override
 	public void run() {
+		if (x + w > view.getWidth() || x < 0) {
+			dx *= -1;
+		}
+		if (y + h > view.getHeight() || y < 0) {
+			dy *= -1;
+		}
 		
+		x += dx;
+		y += dy;
 	}
 }
 
