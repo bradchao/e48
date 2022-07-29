@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -28,13 +30,19 @@ public class MyGame extends JFrame {
 	
 	private class MyPanel extends JPanel {
 		private BufferedImage ball1, ball2;
+		private Timer timer;
+		private int ballX, ballY;
 		
 		MyPanel(){
 			setBackground(Color.yellow);
+			timer = new Timer();
+			ballX = ballY = 100;
 			try {
 				ball1 = ImageIO.read(new File("dir1/ball1.png"));
 				ball2 = ImageIO.read(new File("dir1/ball2.png"));
 			}catch(Exception e){}
+			
+			timer.schedule(new BallTask(), 100, 60);
 		}
 		
 		@Override
@@ -42,9 +50,16 @@ public class MyGame extends JFrame {
 			super.paintComponent(g);
 			Graphics2D g2d = (Graphics2D)g;
 			
-			g2d.drawImage(ball1, 100, 100, null);
-			
-			
+			g2d.drawImage(ball1, ballX, ballY, null);
+		}
+		
+		private class BallTask extends TimerTask {
+			@Override
+			public void run() {
+				ballX += 4;
+				ballY += 4;
+				repaint();
+			}
 		}
 	}
 	
