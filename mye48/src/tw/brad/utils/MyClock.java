@@ -1,19 +1,26 @@
 package tw.brad.utils;
 
-import java.util.Calendar;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JLabel;
 
 public class MyClock extends JLabel {
+	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	private Timer timer;
+	
 	public MyClock() {
-		Date now = new Date();
-		Calendar cal = Calendar.getInstance();
-		int year = cal.get(Calendar.YEAR);
-		int month = cal.get(Calendar.MONTH) + 1;
-		int day = cal.get(Calendar.DAY_OF_MONTH);
-		
-		setText(String.format("%04d-%02d-%02d", year, month, day));
+		timer = new Timer();
+		timer.schedule(new ClockTask(), 0, 1000);
+	}
+	
+	private class ClockTask extends TimerTask {
+		@Override
+		public void run() {
+			setText(sdf.format(new Date()));
+		}
 	}
 
 }
