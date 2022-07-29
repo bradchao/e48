@@ -59,8 +59,8 @@ public class MyGame extends JFrame {
 		}
 		
 		private void createNewBall(int x, int y) {
-			Ball ball = new Ball(x, y, ballW, ballH, this);
-			timer.schedule(ball, 100, 30);
+			Ball ball = new Ball(x - ballW/2, y - ballH/2, ballW, ballH, this);
+			timer.schedule(ball, 100, 10);
 			balls.add(ball);
 		}
 		
