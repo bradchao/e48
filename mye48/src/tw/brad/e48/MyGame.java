@@ -31,15 +31,18 @@ public class MyGame extends JFrame {
 	private class MyPanel extends JPanel {
 		private BufferedImage ball1, ball2;
 		private Timer timer;
-		private int ballX, ballY;
+		private int ballX, ballY, dx, dy, ballW, ballH;
 		
 		MyPanel(){
 			setBackground(Color.yellow);
 			timer = new Timer();
 			ballX = ballY = 100;
+			dx = dy = 4;
 			try {
 				ball1 = ImageIO.read(new File("dir1/ball1.png"));
 				ball2 = ImageIO.read(new File("dir1/ball2.png"));
+				ballW  =ball1.getWidth();
+				ballH = ball1.getHeight();
 			}catch(Exception e){}
 			
 			timer.schedule(new BallTask(), 100, 60);
@@ -56,8 +59,17 @@ public class MyGame extends JFrame {
 		private class BallTask extends TimerTask {
 			@Override
 			public void run() {
-				ballX += 4;
-				ballY += 4;
+				if (ballX + ballW >= MyPanel.this.getWidth() || ballX <= 0) {
+					dx *= -1;
+				}
+				
+				if (ballY + ballH >= MyPanel.this.getHeight() || ballY <= 0) {
+					dy *= -1;
+				}
+				
+				
+				ballX += dx;
+				ballY += dy;
 				repaint();
 			}
 		}
