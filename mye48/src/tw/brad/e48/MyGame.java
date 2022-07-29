@@ -31,53 +31,59 @@ public class MyGame extends JFrame {
 	private class MyPanel extends JPanel {
 		private BufferedImage ball1, ball2;
 		private Timer timer;
-		private int ballX, ballY, dx, dy, ballW, ballH;
+		private boolean isInit;
+		private int ballW, ballH;
 		
 		MyPanel(){
 			setBackground(Color.yellow);
 			timer = new Timer();
-			ballX = ballY = 100;
-			dx = dy = 4;
 			try {
 				ball1 = ImageIO.read(new File("dir1/ball1.png"));
 				ball2 = ImageIO.read(new File("dir1/ball2.png"));
-				ballW  =ball1.getWidth();
-				ballH = ball1.getHeight();
+
 			}catch(Exception e){}
 			
-			timer.schedule(new BallTask(), 100, 60);
+			timer.schedule(new RefreshTask(), 100, 16);	// FPS
+		}
+		
+		private void init() {
+			ballW  =ball1.getWidth();
+			ballH = ball1.getHeight();
+			isInit = true;
 		}
 		
 		@Override
 		protected void paintComponent(Graphics g) {
 			super.paintComponent(g);
-			Graphics2D g2d = (Graphics2D)g;
 			
-			g2d.drawImage(ball1, ballX, ballY, null);
+			if (!isInit) {
+				init();
+			}
+			
+			
+			Graphics2D g2d = (Graphics2D)g;
+			//g2d.drawImage(ball1, ballX, ballY, null);
 		}
 		
-		private class BallTask extends TimerTask {
+		private class RefreshTask extends TimerTask {
 			@Override
 			public void run() {
-				if (ballX + ballW >= MyPanel.this.getWidth() || ballX <= 0) {
-					dx *= -1;
-				}
-				
-				if (ballY + ballH >= MyPanel.this.getHeight() || ballY <= 0) {
-					dy *= -1;
-				}
-				
-				
-				ballX += dx;
-				ballY += dy;
 				repaint();
 			}
 		}
+		
 	}
-	
-
 	public static void main(String[] args) {
 		new MyGame();
 	}
-
 }
+
+class Ball extends TimerTask {
+	
+	@Override
+	public void run() {
+		
+	}
+}
+
+
