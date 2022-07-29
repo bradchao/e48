@@ -8,6 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.LinkedList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -35,9 +36,11 @@ public class MyGame extends JFrame {
 		private Timer timer;
 		private boolean isInit;
 		private int ballW, ballH;
+		private LinkedList<Ball> balls;
 		
 		MyPanel(){
 			setBackground(Color.yellow);
+			balls = new LinkedList<>();
 			timer = new Timer();
 			try {
 				ball1 = ImageIO.read(new File("dir1/ball1.png"));
@@ -56,7 +59,9 @@ public class MyGame extends JFrame {
 		}
 		
 		private void createNewBall(int x, int y) {
-			
+			Ball ball = new Ball(x, y, ballW, ballH, this);
+			timer.schedule(ball, 100, 30);
+			balls.add(ball);
 		}
 		
 		private void init() {
@@ -72,10 +77,13 @@ public class MyGame extends JFrame {
 			if (!isInit) {
 				init();
 			}
-			
-			
 			Graphics2D g2d = (Graphics2D)g;
-			//g2d.drawImage(ball1, ballX, ballY, null);
+			
+			for (Ball ball : balls) {
+				g2d.drawImage(ball.getImg()==1?ball1:ball2, 
+						ball.getX(), ball.getY(), null);
+			}
+			
 		}
 		
 		private class RefreshTask extends TimerTask {
@@ -117,6 +125,10 @@ class Ball extends TimerTask {
 		x += dx;
 		y += dy;
 	}
+	
+	public int getX() {return x;}
+	public int getY() {return y;}
+	public int getImg() {return img;}
 }
 
 
