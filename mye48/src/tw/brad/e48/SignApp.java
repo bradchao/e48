@@ -9,11 +9,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import tw.brad.utils.MyClock;
 import tw.brad.utils.MyDrawer;
 
 public class SignApp extends JFrame {
 	private JButton clear, undo, redo, save, saveObj, loadObj;
 	private MyDrawer myDrawer;
+	private MyClock myClock;
 	
 	public SignApp() {
 		super("SignApp");
@@ -25,10 +27,12 @@ public class SignApp extends JFrame {
 		save = new JButton("Save");
 		saveObj = new JButton("Save Lines");
 		loadObj = new JButton("Load Lines");
+		myClock = new MyClock();
 		
 		JPanel top = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		top.add(clear); top.add(undo); top.add(redo); top.add(save);
 		top.add(saveObj); top.add(loadObj);
+		top.add(myClock);
 		
 		add(top, BorderLayout.NORTH);
 		

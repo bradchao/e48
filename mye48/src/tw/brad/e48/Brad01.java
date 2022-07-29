@@ -12,7 +12,5 @@ public class Brad01 {
 		System.out.println($_$);
 		byte True = 12;
 		System.out.println(True);
-
 	}
-
 }
