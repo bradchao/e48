@@ -26,8 +26,13 @@ public class Brad66 {
 					new BufferedInputStream(conn.getInputStream());
 					){
 				
-				
-				
+				byte[] buf = new byte[1024*1024];
+				int len;
+				while ( (len = bin.read(buf)) != -1) {
+					bout.write(buf, 0, len);
+				}
+				bout.flush();
+				System.out.println("Download OK");
 			}catch(Exception e) {
 				System.out.println(e.toString());
 			}
