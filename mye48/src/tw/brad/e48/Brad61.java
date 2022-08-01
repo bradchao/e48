@@ -1,6 +1,8 @@
 package tw.brad.e48;
 
+import java.io.BufferedReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -8,21 +10,30 @@ public class Brad61 {
 
 	public static void main(String[] args) {
 		try {
-			ServerSocket server = new ServerSocket(7777);
-			System.out.println("wait......");
+			ServerSocket server = new ServerSocket(8884);
+			System.out.println("wait......4");
 			Socket socket = server.accept();
 			
+			String urip = socket.getInetAddress().getHostAddress();
+			System.out.println("ip => " + urip);
+			
 			InputStream in = socket.getInputStream();
-			byte[] buf = new byte[8];
-			int len;
-			StringBuffer sb = new StringBuffer();
-			while ( (len = in.read(buf)) != -1) {
-				sb.append(new String(buf,0,len));
+			InputStreamReader ir = new InputStreamReader(in);
+			BufferedReader reader = new BufferedReader(ir);
+			
+			String line; StringBuffer sb = new StringBuffer();
+			while ( (line = reader.readLine()) != null) {
+				//sb.append(line + "\n");
+				System.out.println(line + "\n");
 			}
 			in.close();
 			
+			socket.close();
+				
 			server.close();
-			System.out.println("OK:" + sb.toString());
+			System.out.println("Server OK");
+			System.out.println(urip + ":" + sb.toString());
+			
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
