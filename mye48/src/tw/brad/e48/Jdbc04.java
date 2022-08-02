@@ -20,7 +20,11 @@ public class Jdbc04 {
 			
 			String sql = "INSERT INTO cust (cname,tel,birthday) VALUES (?,?,?)";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			
+			pstmt.setString(1, "brad");
+			pstmt.setString(2, "112233");
+			pstmt.setString(3, "1999-02-03");
+			int n = pstmt.executeUpdate();
+			System.out.println(n);
 			
 		} catch (SQLException e) {
 			System.out.println(e.toString());
