@@ -2,6 +2,7 @@ package tw.brad.e48;
 
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -10,6 +11,7 @@ import java.util.Properties;
 
 import tw.brad.utils.BCrypt;
 import tw.brad.utils.Member;
+import tw.brad.utils.Student;
 
 public class Jdbc11 {
 
@@ -35,7 +37,23 @@ public class Jdbc11 {
 			}
 			fout.flush();
 			fout.close();
-			System.out.println("OK");
+			System.out.println("OK1");
+			
+//			Object obj = rs.getObject("student");
+//			if (obj instanceof Student) {
+//				System.out.println("OK2");
+//			}
+			//System.out.println(obj.score() + ":" + obj.avg());
+			
+			InputStream in2 = rs.getBinaryStream("student");
+			ObjectInputStream oin = new ObjectInputStream(in2);
+			Object obj2 = oin.readObject();
+			if (obj2 instanceof Student) {
+				Student s1 = (Student)obj2;
+				System.out.println(s1.score() + ":" + s1.avg());
+			}
+			
+			
 		}catch(Exception e) {
 			System.out.println(e.toString());
 		}
