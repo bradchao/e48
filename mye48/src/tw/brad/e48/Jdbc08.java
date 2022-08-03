@@ -3,6 +3,7 @@ package tw.brad.e48;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Properties;
 
 public class Jdbc08 {
@@ -38,8 +39,10 @@ public class Jdbc08 {
 		
 	}
 	
-	static boolean isDataRepeat(String account) {
-		return true;
+	static boolean isDataRepeat(String account) throws Exception {
+		checkStatement.setString(1, account);
+		ResultSet rs = checkStatement.executeQuery();
+		return rs.next();
 	}
 	
 	static boolean appendData(String account, String passwd, String realname) {
