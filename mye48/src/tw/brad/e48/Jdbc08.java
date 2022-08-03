@@ -14,7 +14,7 @@ public class Jdbc08 {
 	static PreparedStatement checkStatement, appendStatement;
 
 	public static void main(String[] args) {
-		String accont = "brad", passwd = "123456", realname = "BradOK";
+		String accont = "tony", passwd = "123456", realname = "BradOK";
 		
 		Properties prop = new Properties();
 		prop.put("user", "root");
