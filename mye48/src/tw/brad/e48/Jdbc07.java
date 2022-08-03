@@ -27,11 +27,11 @@ public class Jdbc07 {
 			ResultSet rs = pstmt.executeQuery();
 			rs.next();
 			int nums = rs.getInt("nums");
-			System.out.println(nums);
+			//System.out.println(nums);
 			
-			int rpp = 4;
+			int rpp = 10;
 			int start = (page - 1)*rpp;
-			sql = String.format("SELECT * FROM souvenir LIMIT %d, %d", start,rpp);
+			sql = String.format("SELECT * FROM souvenir WHERE addr like '澎湖%%' ORDER BY addr LIMIT %d, %d", start,rpp);
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
