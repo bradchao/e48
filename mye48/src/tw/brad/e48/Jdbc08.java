@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Properties;
 
+import tw.brad.utils.BCrypt;
+
 public class Jdbc08 {
 	static final String sqlCheckAccount = "SELECT account FROM member WHERE account = ?";
 	static final String sqlAppendAccount = "INSERT INTO member (account,passwd,realname) VALUES (?,?,?)";
@@ -45,8 +47,14 @@ public class Jdbc08 {
 		return rs.next();
 	}
 	
-	static boolean appendData(String account, String passwd, String realname) {
-		return true;
+	static boolean appendData(String account, String passwd, String realname)
+		throws Exception {
+		appendStatement.setString(1, account);
+		appendStatement.setString(2, BCrypt.hashpw(passwd, BCrypt.gensalt()));
+		appendStatement.setString(3, realname);
+		int n = appendStatement.executeUpdate();
+		
+		return n != 0;
 	}
 
 }
