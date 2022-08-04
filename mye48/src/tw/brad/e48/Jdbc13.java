@@ -34,10 +34,19 @@ public class Jdbc13 {
 					ResultSet.CONCUR_UPDATABLE);
 			ResultSet rs = stmt.executeQuery(sql);
 			rs.next();
+			rs.next();
 			System.out.println(rs.getString("id") +":" + rs.getString("cname"));
 			
-			rs.updateString("tel", "112233");
-			rs.updateRow();
+//			rs.updateString("tel", "112233");
+//			rs.updateRow();
+			
+//			rs.deleteRow();
+			
+			rs.moveToInsertRow();
+			rs.updateString("cname", "eric");
+			rs.updateString("tel", "987654321");
+			rs.updateString("birthday", "1999-01-02");
+			rs.insertRow();
 			
 			
 		}catch(Exception e) {
