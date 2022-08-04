@@ -5,6 +5,7 @@ import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Properties;
 
 import tw.brad.utils.BCrypt;
@@ -27,6 +28,13 @@ public class Jdbc13 {
 					ResultSet.CONCUR_UPDATABLE);
 			System.out.println(isSupport);
 			
+			String sql = "SELECT * FROM cust";
+			Statement stmt = conn.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE, 
+					ResultSet.CONCUR_UPDATABLE);
+			ResultSet rs = stmt.executeQuery(sql);
+			rs.next();
+			System.out.println(rs.getString("id") +":" + rs.getString("cname"));
 			
 			
 		}catch(Exception e) {
