@@ -36,6 +36,9 @@ public class Jdbc13 {
 			rs.next();
 			System.out.println(rs.getString("id") +":" + rs.getString("cname"));
 			
+			rs.updateString("tel", "112233");
+			rs.updateRow();
+			
 			
 		}catch(Exception e) {
 			System.out.println(e.toString());
